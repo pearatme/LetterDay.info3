@@ -40,7 +40,7 @@ const update_letter = async (date) => {
     start = new Date("8/28/19");
     school_days = working_days(start, date);
 
-    resposnse = await fetch("https://letterdaycom.josephgulian.repl.co/days_off.json")
+    resposnse = await fetch("/days_off.json")
     days_off = await resposnse.json();
 
     days_off.forEach(function(day) {
