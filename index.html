@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Basic Page Needs
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>LetterDay.info</title>
+    <meta name="description" content="A tracker for the Methacton Hight School letter of each day.">
+    <meta name="author" content="Joseph Gulian">
+
+    <!-- Mobile Specific Metas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+    <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="style/normalize.css">
+  <link rel="stylesheet" href="style/skeleton.css">
+    <link rel="stylesheet" href="style/style.css">
+
+
+    <!-- Favicon
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+</head>
+<body id="body">
+<div class="table-container">
+    <div class="table-block footer-push">
+        <div class="container">
+            <div class="row">
+                <div id="app" class=" bold center" style="margin-top: 10%">
+                    <h3>LetterDay.info</h3>
+                    <h3 id="date"></h3>
+                    <div id="main-ui" class="offset-by-three columns six">
+                        <div class="row">
+                            <h1 class="one-third column"><a  onclick="yesterday();" href="#"
+                                                            class="black no-underline"><</a></h1>
+                            <h1 class="one-third column" id="letter"></h1>
+                            <h1 class="one-third column"><a  onclick="tomorrow();" href="#"
+                                                            class="black no-underline">></a></h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+</div>
+
+    <!-- SCRIPTS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<script async src="script.js"></script>
+<script src="https://www.googletagmanager.com/gtag/js?id=UA-127589730-1"></script>
+<script type="text/javascript">
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-127589730-1');
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-127589730-1', 'auto');
+    ga('send', 'pageview');
+</script>
+</body>
+</html>
