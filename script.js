@@ -1,37 +1,41 @@
-
-
-function format_date(date){
-	return (date.getMonth() + 1) + 
-    "/" +  date.getDate() +
-    "/" +  date.getFullYear();
+function format_date(date) {
+    return (date.getMonth() + 1) +
+        "/" + date.getDate() +
+        "/" + date.getFullYear();
 }
 
-function working_days (fromDate, toDate) {
-if(!fromDate||isNaN(fromDate)||this<fromDate){return -1;}
-if(!toDate||isNaN(toDate)||this<toDate){return -1;}
- 
- // clone date to avoid messing up original date and time
- var frD=new Date(fromDate.getTime()),
-     toD=new Date(toDate.getTime()),
-     numOfWorkingDays=1;
- 
- // reset time portion
- frD.setHours(0,0,0,0);
- toD.setHours(0,0,0,0);
- 
- while(frD<toD){
-  frD.setDate(frD.getDate()+1);
-  var day=frD.getDay();
-  if(day!=0&&day!=6){numOfWorkingDays++;}
- }
- return numOfWorkingDays - 1;
+function working_days(fromDate, toDate) {
+    if (!fromDate || isNaN(fromDate) || this < fromDate) {
+        return -1;
+    }
+    if (!toDate || isNaN(toDate) || this < toDate) {
+        return -1;
+    }
+
+    // clone date to avoid messing up original date and time
+    var frD = new Date(fromDate.getTime()),
+        toD = new Date(toDate.getTime()),
+        numOfWorkingDays = 1;
+
+    // reset time portion
+    frD.setHours(0, 0, 0, 0);
+    toD.setHours(0, 0, 0, 0);
+
+    while (frD < toD) {
+        frD.setDate(frD.getDate() + 1);
+        var day = frD.getDay();
+        if (day != 0 && day != 6) {
+            numOfWorkingDays++;
+        }
+    }
+    return numOfWorkingDays - 1;
 }
 
 const update_letter = async (date) => {
-	if(date.getDay() == 6 || date.getDay() == 0){
-			letter.innerHTML = "∅";
-			return;
-	}
+    if (date.getDay() == 6 || date.getDay() == 0) {
+        letter.innerHTML = "∅";
+        return;
+    }
 
     letter = document.getElementById("letter");
     letter_symbols = ["A", "B", "C", "D", "E", "F"]
@@ -43,18 +47,18 @@ const update_letter = async (date) => {
     resposnse = await fetch("/days_off.json")
     days_off = await resposnse.json();
 
-    days_off.forEach(function(day) {
-        if (new Date(day) < date){
+    for (let day of days_off) {
+        if (format_date(new Date(day)) == format_date(date)) {
+            letter.innerHTML = "∅";
+            return;
+        } else if (new Date(day) < date) {
             school_days--;
-		} else if(new Date(day) == date){
-			letter.innerHTML = "∅";
-			return;
-		}
-    });
+        }
+    }
 
     letter.innerHTML = letter_symbols[school_days % 6];
 
-	ga('send', {
+    ga('send', {
         hitType: 'event',
         eventCategory: 'calculate',
         eventAction: 'calculateDate',
@@ -62,12 +66,12 @@ const update_letter = async (date) => {
     });
 }
 
-function yesterday(){
-	date = new Date(document.getElementById("date").innerHTML);
-	date.setDate(date.getDate() - 1);
-	update_letter(date);
-	document.getElementById("date").innerHTML = format_date(date);
-	ga('send', {
+function yesterday() {
+    date = new Date(document.getElementById("date").innerHTML);
+    date.setDate(date.getDate() - 1);
+    update_letter(date);
+    document.getElementById("date").innerHTML = format_date(date);
+    ga('send', {
         hitType: 'event',
         eventCategory: 'view',
         eventAction: 'goto',
@@ -75,12 +79,12 @@ function yesterday(){
     });
 }
 
-function tomorrow(){
-	date = new Date(document.getElementById("date").innerHTML);
-	date.setDate(date.getDate() + 1);
-	update_letter(date);
-	document.getElementById("date").innerHTML = format_date(date);
-	ga('send', {
+function tomorrow() {
+    date = new Date(document.getElementById("date").innerHTML);
+    date.setDate(date.getDate() + 1);
+    update_letter(date);
+    document.getElementById("date").innerHTML = format_date(date);
+    ga('send', {
         hitType: 'event',
         eventCategory: 'view',
         eventAction: 'goto',
