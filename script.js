@@ -41,7 +41,7 @@ const update_letter = async (date) => {
     letter_symbols = ["A", "B", "C", "D", "E", "F"]
     one_day = 24 * 60 * 60 * 1000;
 
-    start = new Date("8/28/19");
+    start = new Date("9/8/20");
     school_days = working_days(start, date);
 
     resposnse = await fetch("/days_off.json")
